@@ -3,7 +3,7 @@ import { Hero } from "@/components/sections/Hero";
 import { Making } from "@/components/sections/Making";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import { about, experience, skills, socials, site } from "@/lib/content";
+import { about, experience, socials, site } from "@/lib/content";
 
 export default function Home() {
   return (
@@ -27,37 +27,39 @@ export default function Home() {
         </div>
 
         <div className="border-t border-border">
-          {/* Experience */}
+          {/* Experience — timeline */}
           <section id="work" className="mx-auto max-w-3xl px-6 py-20 sm:py-24">
-            <SectionHeading eyebrow="Experience" title="Where I've worked" />
+            <SectionHeading eyebrow="Experience" title="Professional journey" />
             <Reveal>
-              <p className="mb-10 max-w-2xl text-lg leading-relaxed text-muted">
+              <p className="mb-12 max-w-2xl text-lg leading-relaxed text-muted">
                 {experience.intro}
               </p>
             </Reveal>
-            <ul className="flex flex-col divide-y divide-border">
+            <ol className="relative ml-2 border-l border-border">
               {experience.roles.map((role, i) => (
                 <Reveal as="li" key={role.company} delay={i * 0.05}>
-                  <div className="flex flex-col gap-1 py-6 first:pt-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
-                    <div>
-                      <h3 className="font-semibold tracking-tight text-foreground">
-                        {role.company}
-                      </h3>
-                      <p className="text-sm text-muted">{role.title}</p>
-                    </div>
-                    <p className="max-w-sm text-sm leading-relaxed text-faint sm:text-right">
+                  <div className="relative pb-10 pl-8 last:pb-0">
+                    <span
+                      aria-hidden
+                      className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full border border-border bg-foreground"
+                    />
+                    <h3 className="font-semibold tracking-tight text-foreground">
+                      {role.company}
+                    </h3>
+                    <p className="mt-0.5 text-sm text-muted">{role.title}</p>
+                    <p className="mt-2 max-w-lg text-sm leading-relaxed text-faint">
                       {role.note}
                     </p>
                   </div>
                 </Reveal>
               ))}
-            </ul>
+            </ol>
             <Reveal delay={0.1}>
               <a
                 href={site.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-10 inline-block text-sm link-quiet"
+                className="mt-6 inline-block text-sm link-quiet"
               >
                 Full résumé ↗
               </a>
@@ -67,25 +69,6 @@ export default function Home() {
 
         <div className="border-t border-border">
           <Making />
-        </div>
-
-        <div className="border-t border-border">
-          {/* Skills */}
-          <section className="mx-auto max-w-3xl px-6 py-20 sm:py-24">
-            <SectionHeading eyebrow="Toolkit" title="Skills & tech" />
-            <Reveal>
-              <ul className="flex flex-wrap gap-x-3 gap-y-3">
-                {skills.map((s) => (
-                  <li
-                    key={s}
-                    className="rounded-full border border-border px-4 py-1.5 font-mono text-xs tracking-wide text-muted"
-                  >
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </section>
         </div>
       </main>
 
