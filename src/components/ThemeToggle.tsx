@@ -13,7 +13,7 @@ function getInitial(): Theme {
     : "light";
 }
 
-function Bulb({ on }: { on: boolean }) {
+function ContrastCircle({ dark }: { dark: boolean }) {
   return (
     <svg
       width="18"
@@ -22,23 +22,15 @@ function Bulb({ on }: { on: boolean }) {
       fill="none"
       stroke="currentColor"
       strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
       aria-hidden="true"
+      style={{
+        transform: dark ? "rotate(180deg)" : "rotate(0deg)",
+        transition: "transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)",
+      }}
     >
-      {/* bulb glass — filled when "on" */}
-      <path
-        d="M9 18h6M10 21.5h4M15 14c.2-1 .7-1.7 1.5-2.5A5.6 5.6 0 1 0 7.5 11.5c.8.8 1.3 1.5 1.5 2.5"
-        fill={on ? "currentColor" : "none"}
-        opacity={on ? 0.18 : 1}
-      />
-      <path d="M9 18h6M10 21.5h4M15 14c.2-1 .7-1.7 1.5-2.5A5.6 5.6 0 1 0 7.5 11.5c.8.8 1.3 1.5 1.5 2.5" />
-      {/* glow rays when on */}
-      {on && (
-        <g opacity="0.9">
-          <path d="M12 1.5v1.4M4.3 4.3l1 1M1.8 12h1.4M19.7 4.3l-1 1M20.8 12h1.4" />
-        </g>
-      )}
+      <circle cx="12" cy="12" r="9" />
+      {/* filled half — its orientation flips with the theme */}
+      <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -63,18 +55,18 @@ export function ThemeToggle() {
     }
   }
 
-  const on = theme === "light";
+  const dark = theme === "dark";
 
   return (
     <button
       type="button"
       onClick={toggle}
-      aria-label={on ? "Switch to dark theme" : "Switch to light theme"}
-      aria-pressed={on}
+      aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+      aria-pressed={dark}
       className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted transition-colors duration-200 hover:text-foreground hover:border-foreground/30"
     >
       <span className={mounted ? "opacity-100" : "opacity-0"}>
-        <Bulb on={on} />
+        <ContrastCircle dark={dark} />
       </span>
     </button>
   );
