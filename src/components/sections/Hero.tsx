@@ -1,5 +1,5 @@
 import { Reveal } from "../Reveal";
-import { hero, site } from "@/lib/content";
+import { hero } from "@/lib/content";
 
 export function Hero() {
   return (
@@ -21,14 +21,6 @@ export function Hero() {
         <div className="mt-8 flex items-center gap-6 text-sm">
           <a href="#contact" className="link-quiet font-medium">
             Get in touch
-          </a>
-          <a
-            href={site.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted hover:text-foreground transition-colors"
-          >
-            Résumé ↗
           </a>
         </div>
       </Reveal>
