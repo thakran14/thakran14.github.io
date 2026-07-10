@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Design tokens — quiet, editorial, black on white.
+   A "modern Paul Graham": intelligent, minimal, type-forward.
+----------------------------------------------------------------*/
+:root {
+  --background: #fcfcfc;
+  --foreground: #0a0a0a;
+  --muted: #6b6b6b;
+  --faint: #8f8f8f;
+  --border: #e6e6e6;
+  --surface: #f4f4f4;
+  --accent: #0a0a0a;
+  --selection: #e8e8e8;
+}
+
+:root[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --muted: #a1a1a1;
+  --faint: #7a7a7a;
+  --border: #232323;
+  --surface: #161616;
+  --accent: #ededed;
+  --selection: #262626;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --muted: #a1a1a1;
+    --faint: #7a7a7a;
+    --border: #232323;
+    --surface: #161616;
+    --accent: #ededed;
+    --selection: #262626;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-fira-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-fira-mono), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.011em;
+}
+
+::selection {
+  background: var(--selection);
+}
+
+/* Small editorial "eyebrow" label */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+  font-weight: 500;
+}
+
+/* Subtle underline links that don't shout */
+.link-quiet {
+  color: var(--foreground);
+  text-decoration: none;
+  background-image: linear-gradient(var(--faint), var(--faint));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  transition: background-size 0.2s ease, color 0.2s ease;
+  padding-bottom: 1px;
+}
+.link-quiet:hover {
+  color: var(--muted);
+  background-image: linear-gradient(var(--foreground), var(--foreground));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
